@@ -17,7 +17,7 @@ def encode(file,message):
         except Exception as e:
             print("An error occured while opening file:", e)
             sys.exit(1)
-        message_bytes=message.encode('latin-1')
+        message_bytes=message.encode('utf-8')
         with open("output_video.mp4","wb") as f:
             f.write(existing_data)
             f.write(message_bytes)
@@ -42,7 +42,7 @@ def decode(file_path):
     if extra_size>0:
         with open(file_path,'rb') as f:
             f.seek(last_valid_end)
-            message=f.read().decode('latin-1')
+            message=f.read().decode('utf-8',errors='replace')
         result=Text()
         result.append("Success! Secret message found:\n\n", style="bold green")
         result.append(message, style="yellow italic")
